@@ -20,9 +20,7 @@ dvd-release/
 ├── score_images.py                          # entry point
 ├── data/
 │   ├── dominancebench_300.csv               # DominanceBench
-│   ├── independent_prompts_300.csv          # independent template-based set (no SD1.4 filtering)
-│   ├── triplet_factorial_prompts_240.csv    # three-target prompts, 8 conditions x 30
-│   └── triplet_pilot_prompts_30.csv         # first three-target pilot
+│   └── independent_prompts_300.csv          # independent template-based set (no SD1.4 filtering)
 └── dvd_score/
     ├── questions.py                         # question sets and answer instructions
     ├── judge.py                             # Qwen2-VL yes/no judge
@@ -47,10 +45,6 @@ dvd-release/
 ### `independent_prompts_300.csv`
 
 300 prompts built from the same concept/object vocabulary with fixed templates, without SD1.4-based filtering. Same columns as above plus `object_prompt_phrase`, `template_id`, and `source`.
-
-### `triplet_factorial_prompts_240.csv` and `triplet_pilot_prompts_30.csv`
-
-Prompts containing three targets (`target1`-`target3` with their types). The factorial set crosses concept homogeneity levels (`target*_homogeneity`, `condition`) with 30 prompts per condition. These prompts use a different scoring script that is not included here; the files are released as prompt lists.
 
 ## DvD Score
 
