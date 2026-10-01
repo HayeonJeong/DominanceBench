@@ -23,7 +23,6 @@ class ScoreConfig:
     case_start: Optional[int]
     case_end: Optional[int]
     max_images_per_case: int
-    allow_gallery_fallback: bool
 
     def torch_device(self) -> str:
         """Return 'cuda:<index>' when a GPU index is given and CUDA exists, otherwise 'cpu'."""
@@ -54,11 +53,6 @@ class ScoreArgumentParser:
         self.parser.add_argument("--case_start", type=int, default=None)
         self.parser.add_argument("--case_end", type=int, default=None)
         self.parser.add_argument("--max_images_per_case", type=int, default=0, help="0 means use all images")
-        self.parser.add_argument(
-            "--allow_gallery_fallback",
-            action="store_true",
-            help="If a case folder has no images, use <gen_dir>/0_gallery/caseNNN_* images instead.",
-        )
 
     def parse(self, argv: Optional[List[str]] = None) -> ScoreConfig:
         """Parse command-line arguments into a ScoreConfig."""
@@ -74,5 +68,4 @@ class ScoreArgumentParser:
             case_start=args.case_start,
             case_end=args.case_end,
             max_images_per_case=args.max_images_per_case,
-            allow_gallery_fallback=args.allow_gallery_fallback,
         )

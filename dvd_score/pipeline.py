@@ -36,10 +36,7 @@ class ScoringPipeline:
         # Load the prompt table, the image locator, and the Qwen2-VL judge.
         self.config = config
         self.prompt_table = PromptTable(config.meta_csv)
-        self.image_locator = ImageLocator(
-            gen_dir=config.gen_dir,
-            allow_gallery_fallback=config.allow_gallery_fallback,
-        )
+        self.image_locator = ImageLocator(gen_dir=config.gen_dir)
         device = config.torch_device()
         print(f"[INFO] Loading {config.model_name} on {device}")
         judge = QwenYesNoJudge(
@@ -66,7 +63,7 @@ class ScoringPipeline:
             self.missing_cases.append(case_num)
             return None
 
-        image_paths = self.image_locator.collect_images(case_dir=case_dir, case_num=case_num)
+        image_paths = self.image_locator.collect_images(case_dir)
         if not image_paths:
             print(f"[WARN] No images for case{case_num:03d} in {case_dir}")
             return None
@@ -115,7 +112,7 @@ class ScoringPipeline:
         # Score all images of one prompt and attach the per-prompt mean.
         content = str(row.get("content", "")).strip()
         object_word = str(row.get("nm_word", "")).strip()
-        content_type = self.prompt_table.resolve_content_type(row=row, case_num=case_num)
+        content_type = PromptTable.resolve_content_type(row=row, case_num=case_num)
 
         case_records: List[Dict[str, object]] = []
         for image_path in image_paths:

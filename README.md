@@ -99,7 +99,6 @@ Options:
 | `--model_name` | `Qwen/Qwen2-VL-2B-Instruct` | judge model |
 | `--case_start`, `--case_end` | none | score only this inclusive range of `case_num` |
 | `--max_images_per_case` | `0` | use only the first N images per prompt (0 = all) |
-| `--allow_gallery_fallback` | off | if a case folder is empty, use `<gen_dir>/0_gallery/caseNNN_*` images |
 
 Output: one row per image with the 10 answers (`content_answers`, `nm_answers`), `content_score`, `nm_score`, `dvd_score`, and `dvd_mean_case`.
 
