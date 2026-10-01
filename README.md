@@ -6,7 +6,7 @@ Prompts and scoring code for **"Dominant vs. Dominated: Concept-Level Generative
 
 This repository contains:
 
-- **DominanceBench** (300 prompts) and the additional prompt sets used in the paper.
+- **DominanceBench** (300 prompts).
 - **DvD Score** code, which uses `Qwen/Qwen2-VL-2B-Instruct` as a yes/no judge.
 
 Image generation code, attention analysis (Focus Score), and head ablation code are not part of this release.
@@ -19,8 +19,7 @@ dvd-release/
 ├── requirements.txt
 ├── score_images.py                          # entry point
 ├── data/
-│   ├── dominancebench_300.csv               # DominanceBench
-│   └── independent_prompts_300.csv          # independent template-based set (no SD1.4 filtering)
+│   └── dominancebench_300.csv               # DominanceBench
 └── dvd_score/
     ├── questions.py                         # question sets and answer instructions
     ├── judge.py                             # Qwen2-VL yes/no judge
@@ -30,9 +29,9 @@ dvd-release/
     └── pipeline.py                          # scoring loop and CSV output
 ```
 
-## Prompt sets
+## DominanceBench
 
-### `dominancebench_300.csv`
+`data/dominancebench_300.csv`
 
 | column | meaning |
 |---|---|
@@ -41,10 +40,6 @@ dvd-release/
 | `content` | the concept expected to dominate (e.g. `rembrandt`) |
 | `nm_word` | the object expected to be suppressed (e.g. `notebook`) |
 | `prompt` | text prompt given to the diffusion model |
-
-### `independent_prompts_300.csv`
-
-300 prompts built from the same concept/object vocabulary with fixed templates, without SD1.4-based filtering. Same columns as above plus `object_prompt_phrase`, `template_id`, and `source`.
 
 ## DvD Score
 
